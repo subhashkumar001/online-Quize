@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Practice Corner — Honest Quiz & Practice for Students</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="paper-overlay" aria-hidden="true"></div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-content">
+      <a href="/" class="logo-area">
+        <span class="logo-title">Practice Corner</span>
+        <span class="logo-tag">Student Edition</span>
+      </a>
+      <div id="user-nav-container" class="user-nav">
+        <!-- Rendered by auth-nav.js -->
+        <a href="/login" class="btn btn-primary" style="font-size: 19px; padding: 6px 18px;">Sign in</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Hero Notice Board -->
+  <main class="container">
+    <div class="paper-card" style="transform: rotate(-0.5deg); margin-top: 10px;">
+      <div class="tape" aria-hidden="true"></div>
+      
+      <div style="max-width: 720px; margin: 0 auto; text-align: center; padding: 10px 0;">
+        <h1 style="font-family: var(--font-hand); font-size: clamp(38px, 6vw, 56px); line-height: 1.1; margin-bottom: 16px;">
+          Practice that feels like a quiet study desk.
+        </h1>
+        
+        <p style="font-size: 19px; color: var(--ink-muted); line-height: 1.6; margin-bottom: 28px;">
+          No purple gradients. No glowing countdowns. No pressure. Pick a subject, test yourself on 10, 20 or 50 curated college & school questions, and see the answers right away.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-bottom: 36px;">
+          <a href="/subjects" class="btn btn-primary" style="font-size: 24px; padding: 12px 32px;">
+            Start Practicing &rarr;
+          </a>
+          <a href="/signup" class="btn btn-secondary" style="font-size: 24px; padding: 12px 28px;">
+            Create Student Account
+          </a>
+        </div>
+
+        <!-- Hand-drawn Subjects Preview Tags -->
+        <div style="border-top: 2px dashed rgba(59, 47, 47, 0.25); padding-top: 24px;">
+          <p style="font-family: var(--font-hand); font-size: 20px; margin-bottom: 14px; color: var(--ink);">
+            Available Subjects:
+          </p>
+          <div style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+            <span class="logo-tag" style="background: var(--c-maths); font-size: 16px;">Maths (50 Qs)</span>
+            <span class="logo-tag" style="background: var(--c-physics); font-size: 16px;">Physics (50 Qs)</span>
+            <span class="logo-tag" style="background: var(--c-chemistry); font-size: 16px;">Chemistry (50 Qs)</span>
+            <span class="logo-tag" style="background: var(--c-gk); font-size: 16px;">General Knowledge (50 Qs)</span>
+            <span class="logo-tag" style="background: var(--c-english); font-size: 16px;">English (50 Qs)</span>
+            <span class="logo-tag" style="background: var(--c-computers); font-size: 16px;">Computer Basics (50 Qs)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Features Note -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 48px;">
+      <div class="paper-card" style="transform: rotate(1deg); padding: 24px;">
+        <div class="pin" aria-hidden="true"></div>
+        <h3 style="font-family: var(--font-hand); font-size: 24px; margin-bottom: 8px;">1. One Question at a Time</h3>
+        <p style="font-size: 15px; color: var(--ink-muted);">
+          Pick 10, 20 or 50 questions. No clutter. Four options. Keyboard shortcuts (1-4, Enter) supported.
+        </p>
+      </div>
+
+      <div class="paper-card" style="transform: rotate(-1.2deg); padding: 24px;">
+        <div class="pin" aria-hidden="true"></div>
+        <h3 style="font-family: var(--font-hand); font-size: 24px; margin-bottom: 8px;">2. Thorough Review</h3>
+        <p style="font-size: 15px; color: var(--ink-muted);">
+          Every session ends with a clear scorecard and a question-by-question breakdown with explanations.
+        </p>
+      </div>
+
+      <div class="paper-card" style="transform: rotate(0.8deg); padding: 24px;">
+        <div class="pin" aria-hidden="true"></div>
+        <h3 style="font-family: var(--font-hand); font-size: 24px; margin-bottom: 8px;">3. Saved Progress</h3>
+        <p style="font-size: 15px; color: var(--ink-muted);">
+          Your recent attempts are saved to your student notebook so you can watch your scores climb over time.
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <footer style="text-align: center; padding: 24px; font-family: var(--font-hand); font-size: 18px; color: var(--ink-muted);">
+    Practice Corner &middot; Built for students &middot; 2026
+  </footer>
+
+  <script src="/js/auth-nav.js"></script>
+  <script>
+    initAuthNav();
+  </script>
+</body>
+</html>
+
