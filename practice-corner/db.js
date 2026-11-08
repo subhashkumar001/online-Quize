@@ -2,6 +2,11 @@
 require('dotenv').config();
 const { Pool } = require('pg');
 
+if (!process.env.DATABASE_URL) {
+  console.error('\n⚠️  WARNING: DATABASE_URL environment variable is not defined!');
+  console.error('Please configure DATABASE_URL in your .env or in Vercel Settings -> Environment Variables.\n');
+}
+
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: { rejectUnauthorized: false }
@@ -9,9 +14,15 @@ const pool = new Pool({
 
 // Helper for simple queries
 const db = {
-  query: (text, params) => pool.query(text, params),
+  query: (text, params) => {
+    if (!process.env.DATABASE_URL) {
+      throw new Error('DATABASE_URL is not configured. Please add it to your environment variables.');
+    }
+    return pool.query(text, params);
+  },
   pool,
   init: async () => {
+    if (!process.env.DATABASE_URL) return;
     await pool.query(`
       CREATE TABLE IF NOT EXISTS users (
         id SERIAL PRIMARY KEY,

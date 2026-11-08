@@ -141,16 +141,24 @@ document.addEventListener('DOMContentLoaded', () => {
         body: JSON.stringify(payload),
       });
 
-      const data = await res.json();
+      let data = null;
+      try {
+        data = await res.json();
+      } catch (parseErr) {
+        // Response was not JSON (e.g. HTML 404/500 from hosting provider)
+      }
 
       if (!res.ok) {
-        if (data.errors) {
+        if (data && data.errors) {
           // Show server-side inline errors
           Object.keys(data.errors).forEach(key => {
             setInlineError(key, data.errors[key]);
           });
-        } else if (data.error) {
+        } else if (data && data.error) {
           alertBox.textContent = data.error;
+          alertBox.classList.add('visible');
+        } else {
+          alertBox.textContent = `Server error (${res.status}). Please try again or check settings.`;
           alertBox.classList.add('visible');
         }
         submitBtn.disabled = false;

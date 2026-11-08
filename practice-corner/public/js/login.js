@@ -57,10 +57,15 @@ document.addEventListener('DOMContentLoaded', () => {
         body: JSON.stringify({ identifier, password }),
       });
 
-      const data = await res.json();
+      let data = null;
+      try {
+        data = await res.json();
+      } catch (parseErr) {
+        // Non-JSON response
+      }
 
       if (!res.ok) {
-        alertBox.textContent = data.error || 'Failed to sign in. Please verify your credentials.';
+        alertBox.textContent = (data && data.error) || `Sign in failed (${res.status}). Please verify your credentials.`;
         alertBox.classList.add('visible');
         submitBtn.disabled = false;
         submitBtn.textContent = 'Sign In →';

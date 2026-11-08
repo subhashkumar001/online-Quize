@@ -112,7 +112,10 @@ app.post('/api/auth/signup', async (req, res) => {
     });
   } catch (err) {
     console.error('Signup error:', err);
-    return res.status(500).json({ error: 'Server error during sign up. Please try again.' });
+    const msg = err.message && err.message.includes('DATABASE_URL')
+      ? 'Database not connected. Please set DATABASE_URL in Vercel Environment Variables.'
+      : 'Server error during sign up. Please try again.';
+    return res.status(500).json({ error: msg });
   }
 });
 
@@ -157,7 +160,10 @@ app.post('/api/auth/login', async (req, res) => {
     });
   } catch (err) {
     console.error('Login error:', err);
-    return res.status(500).json({ error: 'Server error during login. Please try again.' });
+    const msg = err.message && err.message.includes('DATABASE_URL')
+      ? 'Database not connected. Please set DATABASE_URL in Vercel Environment Variables.'
+      : 'Server error during login. Please try again.';
+    return res.status(500).json({ error: msg });
   }
 });
 
