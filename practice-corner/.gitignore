@@ -1,5 +1,6 @@
 # Dependencies
 node_modules/
+**/node_modules/
 
 # SQLite Databases & WAL files
 *.db
@@ -25,11 +26,17 @@ lerna-debug.log*
 # Operating System files
 .DS_Store
 Thumbs.db
+ehthumbs.db
 desktop.ini
 
 # Editor / IDE directories
 .vscode/
 .idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sublime-project
+*.sublime-workspace
 
 # Temporary / Cache files
 .cache/

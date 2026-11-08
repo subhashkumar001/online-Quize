@@ -14,7 +14,7 @@
     <div class="container header-content">
       <a href="/subjects" class="logo-area">
         <span class="logo-title">Practice Corner</span>
-        <span class="logo-tag">Notice Board</span>
+        <span class="logo-tag">Dashboard</span>
       </a>
       <div id="user-nav-container" class="user-nav">
         <!-- Rendered by auth-nav.js -->
@@ -23,13 +23,13 @@
   </header>
 
   <main class="container">
-    <!-- Notice Board Title -->
+    <!-- Notice Board / Dashboard Title -->
     <div style="text-align: center; margin-bottom: 24px;">
       <h1 style="font-family: var(--font-hand); font-size: clamp(34px, 5vw, 48px); line-height: 1.1;">
         Pick a Subject to Practice
       </h1>
       <p style="color: var(--ink-muted); font-size: 18px; margin-top: 6px;">
-        Click any note below to choose your question count and start a session.
+        Select a subject below to choose your question count and start a session.
       </p>
     </div>
 
@@ -37,7 +37,7 @@
     <div id="subjects-container" class="subjects-grid">
       <!-- Injected by subjects.js -->
       <div style="grid-column: 1/-1; text-align: center; font-family: var(--font-hand); font-size: 24px; padding: 40px;">
-        Loading subject notes...
+        Loading subject cards...
       </div>
     </div>
 
@@ -67,7 +67,7 @@
       <div class="pin" aria-hidden="true"></div>
       
       <h2 id="modal-title" style="font-family: var(--font-hand); font-size: 32px; line-height: 1.1; margin-bottom: 8px;">
-        Practice <span id="modal-subject-name" style="color: var(--c-english);">Subject</span>
+        Practice <span id="modal-subject-name" style="color: var(--primary, #2563eb);">Subject</span>
       </h2>
       <p style="color: var(--ink-muted); font-size: 16px;">
         How many questions would you like in this session?

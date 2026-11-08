@@ -135,7 +135,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           <span style="font-size: 14px; color: var(--ink-muted);">${dateStr}</span>
         </div>
         <div style="display: flex; align-items: center; gap: 16px;">
-          <span style="font-family: var(--font-hand); font-size: 24px; font-weight: bold; color: var(--c-english);">
+          <span style="font-family: var(--font-hand); font-size: 24px; font-weight: bold; color: var(--primary, #2563eb);">
             ${item.score} / ${item.total}
           </span>
           <span style="font-family: var(--font-hand); font-size: 19px; background: var(--bg-paper); border: 2px solid var(--ink); border-radius: var(--radius-tag); padding: 2px 10px;">

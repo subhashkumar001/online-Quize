@@ -3,7 +3,7 @@
 A handmade, quiet quiz website designed for school and college students. 
 
 Created with a deliberate **"student notebook / notice board"** aesthetic:
-- **Background**: Clean white (`#ffffff`).
+- **Background**: gray black (`#222222`).
 - **Ink color**: Dark brown-grey (`#3b2f2f`), never pure black.
 - **Typography**: Hand-lettered headings (*Patrick Hand* & *Caveat*) paired with readable body text (*Nunito*).
 - **Hand-drawn details**: Wobbly border curves (`border-radius: 255px 15px 225px 15px/15px 225px 15px 255px`), 2px dark outlines, soft offset shadows, and cards tilted at slight natural angles (-1.5° to 1.5°).
@@ -71,14 +71,14 @@ Double-click [`start-quiz.bat`](file:///c:/Users/hp/OneDrive/Desktop/portfolio/s
    - Displays a clean **"Sign in"** button when logged out.
    - Displays the student's first name with a **"Sign out"** button when logged in.
 
-4. **Subjects Notice Board (`/subjects`)**:
-   - Pinned subject tiles with soft, muted tones and hand-drawn SVG icons:
-     - 📐 **Maths** (`#d9b45a` Mustard) — Calculus, Linear Algebra, Matrices & Complex Numbers
-     - ⚛️ **Physics** (`#86a3b8` Dusty Blue) — Mechanics, Thermodynamics, Optics & Fields
-     - 🧪 **Chemistry** (`#8fae8b` Sage Green) — Bonding, Thermodynamics, Kinetics & Organic
-     - 🌍 **General Knowledge** (`#d8a7a0` Dusty Pink) — History, Polity, Geography & Science
-     - 📖 **English** (`#c9825b` Terracotta) — Vocabulary, Grammar, Idioms & Antonyms
-     - 💻 **Computer Basics** (`#7fb5ad` Soft Teal) — Binary, CPU Architecture, OS & Networking
+4. **Subjects Dashboard (`/subjects`)**:
+   - Clean, professional dashboard subject cards with modern pastel tones and hand-drawn SVG icons:
+     - 📐 **Maths** (`#dbeafe` Professional Slate Blue) — Calculus, Linear Algebra, Matrices & Complex Numbers
+     - ⚛️ **Physics** (`#ede9fe` Professional Royal Violet) — Mechanics, Thermodynamics, Optics & Fields
+     - 🧪 **Chemistry** (`#d1fae5` Professional Emerald Mint) — Bonding, Thermodynamics, Kinetics & Organic
+     - 🌍 **General Knowledge** (`#fef3c7` Professional Warm Amber) — History, Polity, Geography & Science
+     - 📖 **English** (`#ffe4e6` Professional Soft Rose) — Vocabulary, Grammar, Idioms & Antonyms
+     - 💻 **Computer Basics** (`#cffafe` Professional Cyan Teal) — Binary, CPU Architecture, OS & Networking
    - Choose **10, 20, or 50 questions** before starting.
    - Shows the student's **last 5 practice attempts** with score, percentage, and date.
 
