@@ -4,7 +4,7 @@
   "description": "A handmade quiz website for school and college students.",
   "main": "server.js",
   "engines": {
-    "node": "20.x"
+    "node": "26.x"
   },
   "scripts": {
     "start": "node run.js",

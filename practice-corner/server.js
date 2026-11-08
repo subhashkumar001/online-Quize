@@ -383,12 +383,14 @@ app.get('*', (req, res) => res.sendFile(path.join(__dirname, 'public', 'index.ht
 // Auto-initialize DB tables on startup
 db.init().catch(err => console.error('Database initialization warning:', err.message));
 
-// Start server
-app.listen(PORT, () => {
-  console.log(`\n==============================================`);
-  console.log(`  Practice Corner is running!`);
-  console.log(`  Open in browser: http://localhost:${PORT}`);
-  console.log(`==============================================\n`);
-});
+// Start server (only listen if not running as a Vercel serverless function)
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`\n==============================================`);
+    console.log(`  Practice Corner is running!`);
+    console.log(`  Open in browser: http://localhost:${PORT}`);
+    console.log(`==============================================\n`);
+  });
+}
 
 module.exports = app;
