@@ -16,6 +16,19 @@ const JWT_SECRET = process.env.JWT_SECRET || 'practice-corner-student-secret-202
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+// URL normalization for Vercel Serverless Functions
+app.use((req, res, next) => {
+  const matched = req.headers['x-matched-path'] || req.headers['x-forwarded-uri'];
+  if (matched && (req.url === '/' || req.url === '/api' || req.url.startsWith('/api/index'))) {
+    req.url = matched;
+  }
+  if (req.url.startsWith('/auth/') || req.url.startsWith('/attempts/')) {
+    req.url = `/api${req.url}`;
+  }
+  next();
+});
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Helper to authenticate JWT token from HTTP-only cookie
@@ -46,7 +59,7 @@ async function requireAuth(req, res, next) {
 // -----------------------------------------------------------------------------
 
 // Sign up
-app.post('/api/auth/signup', async (req, res) => {
+app.post(['/api/auth/signup', '/auth/signup'], async (req, res) => {
   const { name, mobile, email, password, confirmPassword } = req.body;
 
   // Validation
@@ -121,7 +134,7 @@ app.post('/api/auth/signup', async (req, res) => {
 });
 
 // Login (supports either email or 10-digit mobile)
-app.post('/api/auth/login', async (req, res) => {
+app.post(['/api/auth/login', '/auth/login'], async (req, res) => {
   const { identifier, password } = req.body;
 
   if (!identifier || !password) {
@@ -169,7 +182,7 @@ app.post('/api/auth/login', async (req, res) => {
 });
 
 // Current user state
-app.get('/api/auth/me', async (req, res) => {
+app.get(['/api/auth/me', '/auth/me'], async (req, res) => {
   const user = await getAuthUser(req);
   if (!user) {
     return res.json({ loggedIn: false });
@@ -182,7 +195,7 @@ app.get('/api/auth/me', async (req, res) => {
 });
 
 // Logout
-app.post('/api/auth/logout', (req, res) => {
+app.post(['/api/auth/logout', '/auth/logout'], (req, res) => {
   res.clearCookie('token');
   res.json({ success: true });
 });
@@ -192,7 +205,7 @@ app.post('/api/auth/logout', (req, res) => {
 // -----------------------------------------------------------------------------
 
 // Get all subjects
-app.get('/api/subjects', async (req, res) => {
+app.get(['/api/subjects', '/subjects/data'], async (req, res) => {
   try {
     const result = await db.query('SELECT id, name, slug, color, description, icon_svg FROM subjects ORDER BY id ASC');
     res.json(result.rows);
@@ -203,7 +216,7 @@ app.get('/api/subjects', async (req, res) => {
 });
 
 // Get user's last 5 attempts
-app.get('/api/attempts/recent', requireAuth, async (req, res) => {
+app.get(['/api/attempts/recent', '/attempts/recent'], requireAuth, async (req, res) => {
   try {
     const result = await db.query(`
       SELECT 
@@ -233,7 +246,7 @@ app.get('/api/attempts/recent', requireAuth, async (req, res) => {
 // -----------------------------------------------------------------------------
 
 // Fetch random questions for a subject with shuffled options
-app.get('/api/quiz/:slug', requireAuth, async (req, res) => {
+app.get(['/api/quiz/:slug', '/quiz/data/:slug'], requireAuth, async (req, res) => {
   const { slug } = req.params;
   const count = parseInt(req.query.count, 10) || 10;
   const validCounts = [10, 20, 50];
@@ -296,7 +309,7 @@ app.get('/api/quiz/:slug', requireAuth, async (req, res) => {
 });
 
 // Submit completed quiz, calculate score, save attempt, and return review
-app.post('/api/quiz/submit', requireAuth, async (req, res) => {
+app.post(['/api/quiz/submit', '/quiz/submit'], requireAuth, async (req, res) => {
   const { subjectSlug, answers } = req.body;
 
   if (!subjectSlug || !Array.isArray(answers)) {

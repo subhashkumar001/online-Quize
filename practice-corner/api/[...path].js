@@ -1,0 +1,6 @@
+// Vercel Serverless Function catch-all handler for /api/*
+const path = require('path');
+require('dotenv').config({ path: path.join(__dirname, '../.env') });
+const app = require('../server');
+
+module.exports = app;
