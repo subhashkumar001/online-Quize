@@ -7,14 +7,12 @@
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-  <div class="paper-overlay" aria-hidden="true"></div>
-
   <!-- Header -->
   <header class="site-header">
     <div class="container header-content">
       <a href="/subjects" class="logo-area">
         <span class="logo-title">Practice Corner</span>
-        <span class="logo-tag">Active Quiz</span>
+        <span class="logo-tag">Quiz</span>
       </a>
       <div id="user-nav-container" class="user-nav">
         <!-- Rendered by auth-nav.js -->
@@ -22,50 +20,45 @@
     </div>
   </header>
 
-  <main class="container narrow-container" style="max-width: 680px;">
-    <!-- Quiz Meta Top Bar -->
+  <main class="container narrow-container">
+    <!-- Top bar -->
     <div class="quiz-header">
-      <span id="subject-badge" class="subject-badge" style="background: #ffffff; color: #000000; border: 1.5px solid #000000;">
-        Subject Loading...
+      <span id="subject-badge" class="subject-badge">
+        Loading...
       </span>
       <span id="progress-indicator" class="progress-badge">
         Question 1 of 10
       </span>
     </div>
 
-    <!-- Question Card with Paper Slide Animation -->
-    <div id="question-card" class="question-card animating">
-      <div class="tape" aria-hidden="true"></div>
-
-      <!-- Question Text -->
+    <!-- Question Box -->
+    <div class="question-card">
       <h2 id="question-text" class="question-text">
         Loading question...
       </h2>
 
-      <!-- Exactly 4 Options List -->
-      <div id="options-container" class="options-list" role="radiogroup" aria-label="Question options">
-        <!-- Rendered by quiz.js -->
+      <!-- Options -->
+      <div id="options-container" class="options-list">
+        <!-- Injected by quiz.js -->
       </div>
-
-      <!-- Helpful Student Keyboard Hint -->
-      <p class="kbd-hint">
-        Tip: Press <strong>1-4</strong> or <strong>A-D</strong> to choose, and <strong>Enter</strong> for next.
-      </p>
     </div>
 
-    <!-- Bottom Controls -->
+    <!-- Controls -->
     <div class="quiz-footer">
-      <a href="/subjects" id="quit-btn" class="btn btn-secondary" style="font-size: 19px;">
-        &larr; Exit to Subjects
+      <a href="/subjects" class="btn btn-secondary">
+        &larr; Exit
       </a>
-      <button type="button" id="next-btn" class="btn btn-primary" style="font-size: 23px; padding: 10px 32px;" disabled>
+      <button type="button" id="next-btn" class="btn btn-primary" style="padding: 10px 24px;" disabled>
         Next Question &rarr;
       </button>
     </div>
   </main>
 
+  <footer>
+    Practice Corner &middot; Student Quiz Portal &middot; 2026
+  </footer>
+
   <script src="/js/auth-nav.js"></script>
   <script src="/js/quiz.js"></script>
 </body>
 </html>
-

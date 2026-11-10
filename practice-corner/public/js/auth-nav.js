@@ -1,6 +1,4 @@
 // Navigation & Auth Helper for Practice Corner
-// Runs on every page to update top-right user state and handle logout
-
 async function initAuthNav(options = {}) {
   const { requireLogin = false, redirectIfLoggedIn = false } = options;
 
@@ -11,37 +9,30 @@ async function initAuthNav(options = {}) {
     const userNavContainer = document.getElementById('user-nav-container');
 
     if (data.loggedIn && data.user) {
-      // If user is already logged in and tries to access /login or /signup, go to /subjects
       if (redirectIfLoggedIn) {
         window.location.href = '/subjects';
         return;
       }
 
-      // Render logged in state in top-right
       if (userNavContainer) {
         userNavContainer.innerHTML = `
-          <div class="user-greeting">Hi, <strong>${escapeHtml(data.user.firstName)}</strong></div>
-          <button id="logout-btn" class="btn btn-secondary" style="font-size: 18px; padding: 5px 16px;">
+          <div class="user-greeting">Hi, <strong>${escapeHtml(data.user.firstName || data.user.name)}</strong></div>
+          <button type="button" id="logout-btn" class="btn btn-secondary" style="padding: 6px 14px; font-size: 14px;">
             Sign out
           </button>
         `;
-
         document.getElementById('logout-btn').addEventListener('click', handleLogout);
       }
     } else {
-      // Not logged in
       if (requireLogin) {
-        // Protected page -> redirect to login
         window.location.href = '/login';
         return;
       }
 
-      // Render logged out state
       if (userNavContainer) {
         userNavContainer.innerHTML = `
-          <a href="/login" class="btn btn-primary" style="font-size: 19px; padding: 6px 18px;">
-            Sign in
-          </a>
+          <a href="/login" class="btn btn-secondary" style="padding: 6px 14px; font-size: 14px;">Sign in</a>
+          <a href="/signup" class="btn btn-primary" style="padding: 6px 14px; font-size: 14px;">Sign up</a>
         `;
       }
     }
@@ -65,7 +56,6 @@ async function handleLogout() {
   }
 }
 
-// Small helper to prevent XSS in rendered student names
 function escapeHtml(str) {
   if (!str) return '';
   return String(str)
@@ -75,4 +65,3 @@ function escapeHtml(str) {
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#039;');
 }
-

@@ -1,19 +1,10 @@
-// Practice Corner - Subjects & Notice Board Logic
+// Practice Corner - Simple Subjects Logic
 document.addEventListener('DOMContentLoaded', async () => {
-  // Enforce login
+  // Check login
   await initAuthNav({ requireLogin: true });
 
   const subjectsContainer = document.getElementById('subjects-container');
   const attemptsContainer = document.getElementById('attempts-container');
-
-  const modal = document.getElementById('count-modal');
-  const modalSubjectName = document.getElementById('modal-subject-name');
-  const modalCancelBtn = document.getElementById('modal-cancel-btn');
-  const modalStartBtn = document.getElementById('modal-start-btn');
-  const countPills = document.querySelectorAll('.count-pill');
-
-  let activeSubjectSlug = null;
-  let selectedCount = 10;
 
   // 1. Fetch & Render Subjects
   try {
@@ -21,98 +12,44 @@ document.addEventListener('DOMContentLoaded', async () => {
     const subjects = await res.json();
 
     if (!Array.isArray(subjects) || subjects.length === 0) {
-      subjectsContainer.innerHTML = '<p style="text-align:center;">No subjects found. Please run seed.js.</p>';
+      subjectsContainer.innerHTML = '<div class="card" style="grid-column: 1/-1; text-align: center;">No subjects found.</div>';
       return;
     }
 
     subjectsContainer.innerHTML = '';
     subjects.forEach((subj) => {
-      const tile = document.createElement('div');
-      tile.className = 'subject-tile';
-      tile.style.backgroundColor = '#ffffff';
-      tile.style.color = '#000000';
-      if (subj.color) {
-        tile.style.borderTop = `4px solid ${subj.color}`;
-      }
-      tile.setAttribute('role', 'button');
-      tile.setAttribute('tabindex', '0');
-      tile.setAttribute('aria-label', `Practice ${subj.name}`);
-
-      tile.innerHTML = `
+      const card = document.createElement('div');
+      card.className = 'subject-card';
+      card.innerHTML = `
         <div>
           <div class="subject-header">
-            <h2 class="subject-title" style="color: #000000;">${escapeHtml(subj.name)}</h2>
-            <div class="subject-icon">${subj.icon_svg}</div>
+            <h3 class="subject-title">${escapeHtml(subj.name)}</h3>
+            <span class="logo-tag">10 Questions</span>
           </div>
-          <p class="subject-desc" style="color: #000000;">${escapeHtml(subj.description)}</p>
+          <p class="subject-desc">${escapeHtml(subj.description)}</p>
         </div>
-        <div class="subject-action" style="color: #000000;">
-          <span style="color: #000000;">Start Practicing</span>
-          <span style="font-size: 20px; color: #000000;">&rarr;</span>
+        <div>
+          <a href="/quiz?subject=${encodeURIComponent(subj.slug)}&count=10" class="btn btn-primary btn-block">
+            Start Quiz &rarr;
+          </a>
         </div>
       `;
-
-      // Click to open count picker modal
-      const openModal = () => {
-        activeSubjectSlug = subj.slug;
-        modalSubjectName.textContent = subj.name;
-        modal.classList.add('open');
-      };
-
-      tile.addEventListener('click', openModal);
-      tile.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          openModal();
-        }
-      });
-
-      subjectsContainer.appendChild(tile);
+      subjectsContainer.appendChild(card);
     });
   } catch (err) {
     console.error('Failed to load subjects:', err);
-    subjectsContainer.innerHTML = '<p style="text-align:center; color:#a82424;">Could not load subjects. Please check if the server is running.</p>';
+    subjectsContainer.innerHTML = '<div class="card" style="grid-column: 1/-1; text-align: center; color: #dc2626;">Could not load subjects. Please check server connection.</div>';
   }
 
-  // 2. Count Picker Modal Handlers
-  countPills.forEach(pill => {
-    pill.addEventListener('click', () => {
-      countPills.forEach(p => p.classList.remove('active'));
-      pill.classList.add('active');
-      selectedCount = parseInt(pill.dataset.count, 10);
-    });
-  });
-
-  modalCancelBtn.addEventListener('click', () => {
-    modal.classList.remove('open');
-  });
-
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) {
-      modal.classList.remove('open');
-    }
-  });
-
-  modalStartBtn.addEventListener('click', () => {
-    if (activeSubjectSlug) {
-      window.location.href = `/quiz?subject=${encodeURIComponent(activeSubjectSlug)}&count=${selectedCount}`;
-    }
-  });
-
-  // 3. Fetch & Render Last 5 Attempts
+  // 2. Fetch & Render Recent Attempts
   try {
     const res = await fetch('/api/attempts/recent');
     const attempts = await res.json();
 
     if (!Array.isArray(attempts) || attempts.length === 0) {
       attemptsContainer.innerHTML = `
-        <div class="paper-card" style="text-align: center; padding: 24px; transform: rotate(-0.5deg);">
-          <p style="font-family: var(--font-hand); font-size: 22px; color: var(--ink);">
-            No practice logs recorded yet!
-          </p>
-          <p style="font-size: 15px; color: var(--ink-muted); margin-top: 4px;">
-            Pick any subject note above to start your very first practice session.
-          </p>
+        <div class="card" style="text-align: center; color: #64748b; padding: 20px;">
+          No practice history yet. Choose any subject above to take your first quiz!
         </div>
       `;
       return;
@@ -124,34 +61,26 @@ document.addEventListener('DOMContentLoaded', async () => {
       const dateStr = new Date(item.created_at).toLocaleDateString('en-US', {
         month: 'short',
         day: 'numeric',
-        year: 'numeric',
         hour: '2-digit',
-        minute: '2-digit',
+        minute: '2-digit'
       });
 
       const row = document.createElement('div');
       row.className = 'attempt-row';
       row.innerHTML = `
-        <div style="display: flex; align-items: center; gap: 14px;">
-          <span class="logo-tag" style="background: #ffffff; color: #000000; border: 1.5px solid #000000; font-size: 14px; font-weight: 600;">
-            ${escapeHtml(item.subject_name)}
-          </span>
-          <span style="font-size: 14px; color: var(--ink-muted);">${dateStr}</span>
+        <div>
+          <strong style="color: #0f172a;">${escapeHtml(item.subject_name)}</strong>
+          <span style="font-size: 13px; color: #64748b; margin-left: 10px;">${dateStr}</span>
         </div>
-        <div style="display: flex; align-items: center; gap: 16px;">
-          <span style="font-family: var(--font-hand); font-size: 24px; font-weight: bold; color: var(--primary, #2563eb);">
-            ${item.score} / ${item.total}
-          </span>
-          <span style="font-family: var(--font-hand); font-size: 19px; background: var(--bg-paper); border: 2px solid var(--ink); border-radius: var(--radius-tag); padding: 2px 10px;">
-            ${percentage}%
-          </span>
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <span style="font-weight: 700; color: #2563eb;">${item.score} / ${item.total}</span>
+          <span class="logo-tag">${percentage}%</span>
         </div>
       `;
       attemptsContainer.appendChild(row);
     });
   } catch (err) {
-    console.error('Failed to load recent attempts:', err);
-    attemptsContainer.innerHTML = '<p style="text-align: center; color: var(--ink-muted);">Could not fetch study history.</p>';
+    console.error('Failed to load attempts:', err);
+    attemptsContainer.innerHTML = '<div style="color: #64748b; padding: 12px;">Could not load practice history.</div>';
   }
 });
-

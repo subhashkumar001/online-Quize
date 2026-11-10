@@ -7,8 +7,6 @@
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-  <div class="paper-overlay" aria-hidden="true"></div>
-
   <!-- Header -->
   <header class="site-header">
     <div class="container header-content">
@@ -23,79 +21,38 @@
   </header>
 
   <main class="container">
-    <!-- Notice Board / Dashboard Title -->
-    <div style="text-align: center; margin-bottom: 24px;">
-      <h1 style="font-family: var(--font-hand); font-size: clamp(34px, 5vw, 48px); line-height: 1.1;">
-        Pick a Subject to Practice
-      </h1>
-      <p style="color: var(--ink-muted); font-size: 18px; margin-top: 6px;">
-        Select a subject below to choose your question count and start a session.
-      </p>
+    <div style="margin-bottom: 24px;">
+      <h1>Choose a Subject</h1>
+      <p>Select any subject below to begin your 10-question practice test.</p>
     </div>
 
-    <!-- Subjects Grid (rendered dynamically or fallback) -->
+    <!-- Subjects Grid -->
     <div id="subjects-container" class="subjects-grid">
-      <!-- Injected by subjects.js -->
-      <div style="grid-column: 1/-1; text-align: center; font-family: var(--font-hand); font-size: 24px; padding: 40px;">
-        Loading subject cards...
+      <div class="card" style="grid-column: 1/-1; text-align: center; color: #64748b; padding: 32px;">
+        Loading subjects...
       </div>
     </div>
 
-    <!-- Last 5 Attempts Section -->
+    <!-- Recent Attempts Section -->
     <section class="attempts-section">
-      <div style="display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
-        <h2 style="font-family: var(--font-hand); font-size: 32px; line-height: 1;">
-          Your Recent Practice Logs
-        </h2>
-        <span style="font-family: var(--font-hand); font-size: 17px; color: var(--ink-muted);">
-          Last 5 sessions recorded
-        </span>
+      <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 12px;">
+        <h2>Recent Practice History</h2>
+        <span style="font-size: 13px; color: #64748b;">Last 5 attempts</span>
       </div>
 
       <div id="attempts-container" class="attempts-list">
-        <!-- Loaded by subjects.js -->
-        <div style="text-align: center; color: var(--ink-muted); padding: 20px;">
+        <div style="text-align: center; color: #64748b; padding: 16px;">
           Checking your study history...
         </div>
       </div>
     </section>
   </main>
 
-  <!-- Question Count Picker Modal -->
-  <div id="count-modal" class="count-picker-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-    <div class="count-picker-box">
-      <div class="pin" aria-hidden="true"></div>
-      
-      <h2 id="modal-title" style="font-family: var(--font-hand); font-size: 32px; line-height: 1.1; margin-bottom: 8px;">
-        Practice <span id="modal-subject-name" style="color: #000000; font-weight: 700;">Subject</span>
-      </h2>
-      <p style="color: var(--ink-muted); font-size: 16px;">
-        How many questions would you like in this session?
-      </p>
-
-      <div class="count-options">
-        <button type="button" class="count-pill active" data-count="10">10 Questions</button>
-        <button type="button" class="count-pill" data-count="20">20 Questions</button>
-        <button type="button" class="count-pill" data-count="50">50 Questions</button>
-      </div>
-
-      <div style="display: flex; justify-content: center; gap: 14px; margin-top: 24px;">
-        <button type="button" id="modal-cancel-btn" class="btn btn-secondary" style="font-size: 20px;">
-          Cancel
-        </button>
-        <button type="button" id="modal-start-btn" class="btn btn-primary" style="font-size: 20px; padding: 8px 28px;">
-          Start Quiz &rarr;
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <footer style="text-align: center; padding: 36px 0; font-family: var(--font-hand); font-size: 18px; color: var(--ink-muted);">
-    Practice Corner &middot; Keep practicing every day
+  <footer>
+    Practice Corner &middot; Student Quiz Portal &middot; 2026
   </footer>
 
   <script src="/js/auth-nav.js"></script>
   <script src="/js/subjects.js"></script>
 </body>
 </html>
-

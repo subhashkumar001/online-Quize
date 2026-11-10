@@ -7,8 +7,6 @@
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-  <div class="paper-overlay" aria-hidden="true"></div>
-
   <!-- Header -->
   <header class="site-header">
     <div class="container header-content">
@@ -17,30 +15,21 @@
         <span class="logo-tag">Student Edition</span>
       </a>
       <div id="user-nav-container" class="user-nav">
-        <a href="/signup" class="btn btn-secondary" style="font-size: 19px; padding: 6px 18px;">Sign up</a>
+        <a href="/signup" class="btn btn-secondary">Sign Up</a>
       </div>
     </div>
   </header>
 
   <main class="container narrow-container">
-    <div class="paper-card" style="transform: rotate(0.6deg);">
-      <div class="pin" aria-hidden="true"></div>
+    <div class="card" style="padding: 32px 28px;">
+      <h1 style="text-align: center; margin-bottom: 6px;">Sign In</h1>
+      <p style="text-align: center; margin-bottom: 24px;">
+        Sign in with your registered email or 10-digit mobile number.
+      </p>
 
-      <div style="text-align: center; margin-bottom: 28px;">
-        <h1 style="font-family: var(--font-hand); font-size: 38px; line-height: 1.1; margin-bottom: 6px;">
-          Welcome Back
-        </h1>
-        <p style="color: var(--ink-muted); font-size: 16px;">
-          Sign in to your notebook with your registered email or 10-digit mobile number.
-        </p>
-      </div>
-
-      <!-- General alert box for error -->
       <div id="alert-box" class="alert-box" role="alert"></div>
 
-      <!-- Login Form -->
       <form id="login-form" novalidate>
-        <!-- Email or Mobile -->
         <div class="form-group">
           <label for="identifier" class="form-label">Email or Mobile Number</label>
           <input
@@ -55,7 +44,6 @@
           <div id="identifier-error" class="form-error"></div>
         </div>
 
-        <!-- Password -->
         <div class="form-group">
           <label for="password" class="form-label">Password</label>
           <input
@@ -70,23 +58,24 @@
           <div id="password-error" class="form-error"></div>
         </div>
 
-        <!-- Submit Button -->
-        <div style="margin-top: 30px;">
-          <button type="submit" id="submit-btn" class="btn btn-primary" style="width: 100%; font-size: 24px; padding: 12px;">
+        <div style="margin-top: 24px;">
+          <button type="submit" id="submit-btn" class="btn btn-primary btn-block" style="padding: 11px;">
             Sign In &rarr;
           </button>
         </div>
       </form>
 
-      <!-- Bottom link -->
-      <div style="text-align: center; margin-top: 24px; font-size: 16px; border-top: 2px dashed rgba(59, 47, 47, 0.2); padding-top: 18px;">
-        Don't have an account yet? <a href="/signup" style="color: var(--c-english); font-weight: bold; text-decoration: underline;">Create one here</a>
+      <div style="text-align: center; margin-top: 20px; font-size: 14px; color: #64748b; border-top: 1px solid #e2e8f0; padding-top: 16px;">
+        Don't have an account? <a href="/signup" style="color: #2563eb; font-weight: 600;">Sign up here</a>
       </div>
     </div>
   </main>
+
+  <footer>
+    Practice Corner &middot; Student Quiz Portal &middot; 2026
+  </footer>
 
   <script src="/js/auth-nav.js"></script>
   <script src="/js/login.js"></script>
 </body>
 </html>
-
