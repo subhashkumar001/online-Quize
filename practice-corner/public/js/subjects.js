@@ -29,7 +29,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     subjects.forEach((subj) => {
       const tile = document.createElement('div');
       tile.className = 'subject-tile';
-      tile.style.backgroundColor = subj.color;
+      tile.style.backgroundColor = '#ffffff';
+      tile.style.color = '#000000';
+      if (subj.color) {
+        tile.style.borderTop = `4px solid ${subj.color}`;
+      }
       tile.setAttribute('role', 'button');
       tile.setAttribute('tabindex', '0');
       tile.setAttribute('aria-label', `Practice ${subj.name}`);
@@ -37,14 +41,14 @@ document.addEventListener('DOMContentLoaded', async () => {
       tile.innerHTML = `
         <div>
           <div class="subject-header">
-            <h2 class="subject-title">${escapeHtml(subj.name)}</h2>
+            <h2 class="subject-title" style="color: #000000;">${escapeHtml(subj.name)}</h2>
             <div class="subject-icon">${subj.icon_svg}</div>
           </div>
-          <p class="subject-desc">${escapeHtml(subj.description)}</p>
+          <p class="subject-desc" style="color: #000000;">${escapeHtml(subj.description)}</p>
         </div>
-        <div class="subject-action">
-          <span>Start Practicing</span>
-          <span style="font-size: 20px;">&rarr;</span>
+        <div class="subject-action" style="color: #000000;">
+          <span style="color: #000000;">Start Practicing</span>
+          <span style="font-size: 20px; color: #000000;">&rarr;</span>
         </div>
       `;
 
@@ -129,7 +133,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       row.className = 'attempt-row';
       row.innerHTML = `
         <div style="display: flex; align-items: center; gap: 14px;">
-          <span class="logo-tag" style="background: ${item.subject_color}; font-size: 16px;">
+          <span class="logo-tag" style="background: #ffffff; color: #000000; border: 1.5px solid #000000; font-size: 14px; font-weight: 600;">
             ${escapeHtml(item.subject_name)}
           </span>
           <span style="font-size: 14px; color: var(--ink-muted);">${dateStr}</span>

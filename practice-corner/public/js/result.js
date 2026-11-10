@@ -32,7 +32,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Populate Subject Tag
   if (result.subject) {
     subjectTag.textContent = result.subject.name;
-    subjectTag.style.backgroundColor = result.subject.color;
+    subjectTag.style.backgroundColor = '#ffffff';
+    subjectTag.style.color = '#000000';
+    subjectTag.style.borderColor = '#000000';
   }
 
   // Populate Score & Stats

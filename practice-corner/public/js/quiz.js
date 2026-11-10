@@ -44,7 +44,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Initialize badge
     subjectBadge.textContent = subjectInfo.name;
-    subjectBadge.style.backgroundColor = subjectInfo.color;
+    subjectBadge.style.backgroundColor = '#ffffff';
+    subjectBadge.style.color = '#000000';
+    subjectBadge.style.borderColor = '#000000';
 
     renderCurrentQuestion();
   } catch (err) {
