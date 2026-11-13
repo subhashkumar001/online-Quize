@@ -69,8 +69,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       row.className = 'attempt-row';
       row.innerHTML = `
         <div>
-          <strong style="color: #0f172a;">${escapeHtml(item.subject_name)}</strong>
-          <span style="font-size: 13px; color: #64748b; margin-left: 10px;">${dateStr}</span>
+          <strong>${escapeHtml(item.subject_name)}</strong>
+          <span style="font-size: 13px; color: var(--text-muted); margin-left: 10px;">${dateStr}</span>
         </div>
         <div style="display: flex; align-items: center; gap: 12px;">
           <span style="font-weight: 700; color: #2563eb;">${item.score} / ${item.total}</span>

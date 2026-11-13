@@ -1,4 +1,43 @@
 // Navigation & Auth Helper for Practice Corner
+
+// 1. Theme Setup (Dark / Light)
+function initTheme() {
+  const saved = localStorage.getItem('theme');
+  const systemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const current = saved || (systemDark ? 'dark' : 'light');
+  document.documentElement.setAttribute('data-theme', current);
+
+  // Attach toggle button to header
+  const headerContent = document.querySelector('.header-content');
+  if (headerContent && !document.getElementById('theme-toggle-btn')) {
+    const toggleBtn = document.createElement('button');
+    toggleBtn.type = 'button';
+    toggleBtn.id = 'theme-toggle-btn';
+    toggleBtn.className = 'theme-toggle';
+    toggleBtn.setAttribute('aria-label', 'Toggle theme');
+    toggleBtn.textContent = current === 'dark' ? '☀️ Light' : '🌙 Dark';
+
+    toggleBtn.addEventListener('click', () => {
+      const active = document.documentElement.getAttribute('data-theme');
+      const next = active === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      toggleBtn.textContent = next === 'dark' ? '☀️ Light' : '🌙 Dark';
+    });
+
+    const userNav = document.getElementById('user-nav-container');
+    if (userNav) {
+      userNav.parentNode.insertBefore(toggleBtn, userNav);
+    } else {
+      headerContent.appendChild(toggleBtn);
+    }
+  }
+}
+
+initTheme();
+document.addEventListener('DOMContentLoaded', initTheme);
+
+// 2. Navigation & User Authentication
 async function initAuthNav(options = {}) {
   const { requireLogin = false, redirectIfLoggedIn = false } = options;
 
